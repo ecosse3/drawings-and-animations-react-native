@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import Animated, {
   useAnimatedStyle,
@@ -7,7 +7,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-import { Pressable, View } from "react-native";
+import { View } from "react-native";
 import { GestureDetector, Gesture } from "react-native-gesture-handler";
 
 import { CenterScreen } from "../components/CenterScreen";
