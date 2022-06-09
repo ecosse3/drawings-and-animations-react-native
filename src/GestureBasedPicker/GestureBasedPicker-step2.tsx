@@ -45,9 +45,6 @@ function snapPoint(x: number) {
     Math.min(0, Math.round(x / WIDTH))
   );
 
-  console.log({ position });
-  console.log(Math.min(0, Math.round(x / WIDTH)));
-
   return position * WIDTH;
 }
 
