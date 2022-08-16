@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import type { ColorValue } from "react-native";
 import { View } from "react-native";
 import Icon from "@expo/vector-icons/MaterialIcons";
-import type { EntryAnimationsValues } from "react-native-reanimated";
 import Animated, {
   measure,
   runOnJS,
@@ -181,11 +180,7 @@ function Toolbar({ addItem }: { addItem: AddItemCallback }) {
       <GestureDetector gesture={pan}>
         <Animated.View
           style={[
-            {
-              flexDirection: "row",
-              width: WIDTH * STICKERS_COUNT,
-              marginLeft: -WIDTH / 2,
-            },
+            { flexDirection: "row", width: WIDTH * 4, marginLeft: -WIDTH / 2 },
             styles,
           ]}
         >
@@ -207,39 +202,6 @@ function Toolbar({ addItem }: { addItem: AddItemCallback }) {
 export function AllTheGestures() {
   const [items, setItems] = useState<JSX.Element[]>([]);
 
-  const CustomEnteringAnimation =
-    ({ x, y, width, height }) =>
-    (values: EntryAnimationsValues) => {
-      "worklet";
-
-      const config = { duration: 800 };
-
-      const startX =
-        x - values.targetGlobalOriginX - (values.targetWidth - width) / 2;
-
-      const startY =
-        y - values.targetGlobalOriginY - (values.targetHeight - height) / 2;
-
-      const animations = {
-        // your animations
-        originX: withTiming(values.targetOriginX, config),
-        originY: withTiming(values.targetOriginY, config),
-      };
-      const initialValues = {
-        // initial values for animations
-        originX: startX,
-        originY: startY,
-      };
-      const callback = (finished: boolean) => {
-        // optional callback that will fire when layout animation ends
-      };
-      return {
-        initialValues,
-        animations,
-        callback,
-      };
-    };
-
   const handleAddItem = (
     icon: React.ComponentProps<typeof Icon>["name"],
     color: ColorValue,
@@ -247,12 +209,7 @@ export function AllTheGestures() {
   ) => {
     setItems([
       ...items,
-      <AnimatedIcon
-        name={icon}
-        color={color}
-        size={frame.width}
-        entering={CustomEnteringAnimation(frame)}
-      />,
+      <AnimatedIcon name={icon} color={color} size={frame.width} />,
     ]);
   };
 
@@ -274,3 +231,4 @@ export function AllTheGestures() {
     </View>
   );
 }
+
